@@ -5,12 +5,20 @@ export const SideBanner = () =>{
         “Experience the convenience of online payments. Secure, fast, and hassle-free.“
       </blockquote>
       <div>
-        <div className="font-semibold">Benefits of Online Payments</div>
+        <div className="font-semibold">How to use:-</div>
         <ul className="list-disc list-inside text-sm text-gray-500 dark:text-gray-400">
-          <li>Instant transactions</li>
-          <li>Secure payment methods</li>
-          <li>24/7 access to your funds</li>
-          <li>Track your spending easily</li>
+          <li>yash@gmail.com, 123456 as login creds</li>
+          <li>deepanshu22@gmail.com, 123456 as login creds</li>
+          <li>you can create your own account throght signup page</li>
+          <li>transfer money from one id to another</li>
+          <li>several things has been taken into consideration like </li>
+          <li>you can not transfer money to yourself</li>
+          <li>you can not transfer money over your existing balance </li>
+          <li>things to be implemented are:-</li>
+          <li>recent transactions</li>
+          <li>friend lists</li>
+          <li>send to random user's just like sending to phone numbers</li>
+          <li>some UX/UI improvements</li>
         </ul>
       </div>
     </div>

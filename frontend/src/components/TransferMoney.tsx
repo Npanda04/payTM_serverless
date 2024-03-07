@@ -30,12 +30,11 @@ export default function TransferMoneyComponent() {
 
     async function sendMoneyTransferRequest() {
         try {
-            const response = await axios.post(`${BACKEND_URL}/api/v1/account/transfer`,postInputs, {
+            await axios.post(`${BACKEND_URL}/api/v1/account/transfer`,postInputs, {
                 headers: {
                     Authorization: localStorage.getItem("token")
                 }
             });
-            console.log(response)
             navigate("/dashboard")
 
         } catch (error) {

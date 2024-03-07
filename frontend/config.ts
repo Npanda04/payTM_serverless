@@ -4,4 +4,4 @@
 
 
 
-export const BACKEND_URL = "http://localhost:8787"
+export const BACKEND_URL = "https://my-app.learn-deepanshu.workers.dev"
