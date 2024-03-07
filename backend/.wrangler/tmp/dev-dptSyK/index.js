@@ -38,7 +38,7 @@ var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__ge
   mod
 ));
 
-// .wrangler/tmp/bundle-GhdxP0/checked-fetch.js
+// .wrangler/tmp/bundle-oiEuFq/checked-fetch.js
 function checkURL(request, init) {
   const url = request instanceof URL ? request : new URL(
     (typeof request === "string" ? new Request(request, init) : request).url
@@ -56,7 +56,7 @@ function checkURL(request, init) {
 }
 var urls;
 var init_checked_fetch = __esm({
-  ".wrangler/tmp/bundle-GhdxP0/checked-fetch.js"() {
+  ".wrangler/tmp/bundle-oiEuFq/checked-fetch.js"() {
     "use strict";
     urls = /* @__PURE__ */ new Set();
     globalThis.fetch = new Proxy(globalThis.fetch, {
@@ -10289,7 +10289,7 @@ var require_dist = __commonJS({
       return mod && mod.__esModule ? mod : { "default": mod };
     };
     Object.defineProperty(exports, "__esModule", { value: true });
-    exports.signinInput = exports.signupInput = void 0;
+    exports.transferMoneyInput = exports.signinInput = exports.signupInput = void 0;
     var zod_1 = __importDefault(require_lib());
     exports.signupInput = zod_1.default.object({
       username: zod_1.default.string().email(),
@@ -10300,14 +10300,18 @@ var require_dist = __commonJS({
       username: zod_1.default.string().email(),
       password: zod_1.default.string().min(6)
     });
+    exports.transferMoneyInput = zod_1.default.object({
+      to: zod_1.default.string(),
+      amount: zod_1.default.number().refine((value) => value > 0)
+    });
   }
 });
 
-// .wrangler/tmp/bundle-GhdxP0/middleware-loader.entry.ts
+// .wrangler/tmp/bundle-oiEuFq/middleware-loader.entry.ts
 init_checked_fetch();
 init_modules_watch_stub();
 
-// .wrangler/tmp/bundle-GhdxP0/middleware-insertion-facade.js
+// .wrangler/tmp/bundle-oiEuFq/middleware-insertion-facade.js
 init_checked_fetch();
 init_modules_watch_stub();
 
@@ -12468,7 +12472,6 @@ accountRouter.get("/balance", async (c) => {
         }
       }
     });
-    console.log(balance);
     if (!balance) {
       return c.json({ error: "Balance not found for the user" });
     }
@@ -12502,7 +12505,6 @@ accountRouter.post("/transfer", async (c) => {
       username: to
     }
   });
-  console.log(receiverAccount);
   if (!receiverAccount) {
     return c.json({
       message: "user not found"
@@ -12661,7 +12663,7 @@ var jsonError = async (request, env, _ctx, middlewareCtx) => {
 var middleware_miniflare3_json_error_default = jsonError;
 var wrap2 = void 0;
 
-// .wrangler/tmp/bundle-GhdxP0/middleware-insertion-facade.js
+// .wrangler/tmp/bundle-oiEuFq/middleware-insertion-facade.js
 var envWrappers = [wrap, wrap2].filter(Boolean);
 var facade = {
   ...src_default,
@@ -12698,7 +12700,7 @@ function __facade_invoke__(request, env, ctx, dispatch, finalMiddleware) {
   ]);
 }
 
-// .wrangler/tmp/bundle-GhdxP0/middleware-loader.entry.ts
+// .wrangler/tmp/bundle-oiEuFq/middleware-loader.entry.ts
 var __Facade_ScheduledController__ = class {
   constructor(scheduledTime, cron, noRetry) {
     this.scheduledTime = scheduledTime;
