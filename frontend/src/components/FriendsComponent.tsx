@@ -2,6 +2,8 @@
 
 import { Button } from "@/components/ui/button"
 import { CardContent, Card } from "./ui/card"
+import { SVGProps } from "react"
+import { JSX } from "react/jsx-runtime"
 
 
 export const FriendsComponent = () => {
@@ -51,9 +53,7 @@ export const FriendsComponent = () => {
     )
 }
 
-
-
-function ChevronRightIcon(props) {
+function ChevronRightIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
     return (
         <svg
             {...props}
