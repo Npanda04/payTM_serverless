@@ -11,7 +11,19 @@ import React from "react"
 
 export const RecentTransaction = () => {
 
-  const [recentTransaction, setRecentTransaction] = useState([])
+  // transaction.interface.ts
+interface Transaction {
+  id: number,
+  amount: number;
+  timestamp: string;
+  message: string | null;
+  receiver: {
+    username: string;
+  };
+}
+
+
+  const [recentTransaction, setRecentTransaction] = useState<Transaction[]>([])
 
 
   useEffect(() => {
