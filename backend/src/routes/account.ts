@@ -116,9 +116,18 @@ accountRouter.post("/transfer", async (c) => {
         where: { userId: parseInt(userId) },
         data: { amount: { decrement: amount } },
       }),
+
       prisma.balance.update({
         where: { userId: receiverAccount.id },
         data: { amount: { increment: amount } },
+      }),
+
+      prisma.transaction.create({
+        data:{
+          senderId: parseInt(userId),
+          receiverId: receiverAccount.id,
+          amount: amount
+        }
       }),
     ]);
 
@@ -130,3 +139,33 @@ accountRouter.post("/transfer", async (c) => {
     await prisma.$disconnect();
   }
 });
+
+
+accountRouter.get("/recent-transactions", async (c) => {
+  try {
+    const prisma = new PrismaClient({
+      datasourceUrl: c.env.DATABASE_URL,
+    }).$extends(withAccelerate());
+
+    const recentTransactions = await prisma.transaction.findMany({
+      take: 3,
+      orderBy: { timestamp: 'desc' },
+      select:{
+        amount: true,
+        timestamp: true,
+        message: true,
+        receiver: {
+          select:{
+            username: true
+          }
+        }
+      } 
+    });
+
+    return c.json(recentTransactions);
+  } catch (error) {
+    console.error('Error fetching recent transactions:', error);
+    return c.json({ error: 'Internal Server Error' });
+  }
+});
+

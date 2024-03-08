@@ -21,6 +21,29 @@ model User {
   username  String   @unique
   password  String
   balance   Balance?
+  sentTransactions    Transaction[] @relation("Sender")
+  receivedTransactions Transaction[] @relation("Receiver")
+}
+
+
+
+
+// prisma/schema.prisma
+
+model Transaction {
+  id          Int      @id @default(autoincrement())
+  senderId    Int
+  receiverId  Int
+  amount      Int
+  timestamp   DateTime @default(now())
+  message     String?
+  sender      User     @relation("Sender", fields: [senderId], references: [id])
+  receiver    User     @relation("Receiver", fields: [receiverId], references: [id])
+
+  @@index([senderId], name: "sender_index")
+  @@index([receiverId], name: "receiver_index")
+
+
 }
 
 model Balance {
@@ -28,5 +51,6 @@ model Balance {
   amount   Int
   userId   Int      @unique
   user     User     @relation(fields: [userId], references: [id])
+  
 }
 
