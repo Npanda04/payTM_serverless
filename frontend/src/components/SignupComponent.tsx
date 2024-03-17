@@ -67,7 +67,7 @@ export default function Component() {
                     ...postInputs,
                     username: e.target.value
                 })
-              }} id="email" placeholder="deepanshu@example.com" required type="email" />
+              }} id="email" placeholder="deepanshu@example.com enter a unique email" required type="email" />
             </div>
             <div className="space-y-2">
               <Label htmlFor="password">Password</Label>
