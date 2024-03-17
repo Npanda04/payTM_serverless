@@ -18,7 +18,10 @@ interface Transaction {
   timestamp: string;
   message: string | null;
   receiver: {
-    username: string;
+    name: string;
+  };
+  sender: {
+    name: string;
   };
 }
 
