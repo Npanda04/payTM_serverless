@@ -32,7 +32,7 @@ export default function Component() {
         try {
             const response = await axios.post(`${BACKEND_URL}/api/v1/user/signup`, postInputs)
             const jwt = response.data
-            localStorage.setItem('token', jwt);
+            localStorage.setItem('token', jwt.message);
             navigate("/dashboard")
             
         } catch (error) {

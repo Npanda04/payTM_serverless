@@ -41,7 +41,6 @@ accountRouter.use("/*", async (c, next) => {
 
 accountRouter.get("/balance", async (c) => {
   const userId = c.get("userId");
-
   const prisma = new PrismaClient({
     datasourceUrl: c.env.DATABASE_URL,
   }).$extends(withAccelerate());
@@ -142,27 +141,87 @@ accountRouter.post("/transfer", async (c) => {
 
 
 accountRouter.get("/recent-transactions", async (c) => {
+
+  const userId = c.get("userId");
   try {
     const prisma = new PrismaClient({
       datasourceUrl: c.env.DATABASE_URL,
     }).$extends(withAccelerate());
 
-    const recentTransactions = await prisma.transaction.findMany({
-      take: 3,
-      orderBy: { timestamp: 'desc' },
-      select:{
-        amount: true,
-        timestamp: true,
-        message: true,
-        receiver: {
-          select:{
-            username: true
-          }
-        }
-      } 
-    });
 
-    return c.json(recentTransactions);
+
+    // Assuming you have Prisma client instance named 'prisma'
+
+ // Replace with the desired userId
+
+const userTransactions = await prisma.transaction.findMany({
+  where: {
+    // Fetch transactions where the user is either the sender or the receiver
+    OR: [
+      { senderId: parseInt(userId) },
+      { receiverId: parseInt(userId) },
+    ],
+  },
+  take: 3, // Limit the result to the top 3 transactions
+  orderBy: {
+    timestamp: 'desc', // Order by timestamp in descending order
+  },
+  select: {
+    amount: true,
+    timestamp: true,
+    message: true,
+    sender: {
+      // Including the 'name' and 'username' fields from the 'User' table for the sender
+      select: {
+        name: true,
+      },
+    },
+    receiver: {
+      // Including the 'name' and 'username' fields from the 'User' table for the receiver
+      select: {
+        name: true,
+      },
+    },
+  },
+});
+
+console.log('User Transactions:', userTransactions);
+
+
+
+
+    
+
+    
+
+    return c.json(userTransactions);
+
+
+
+
+    // const recentTransactions = await prisma.transaction.findMany({
+    //   take: 3,
+    //   orderBy: { timestamp: 'desc' },
+    //   select:{
+    //     amount: true,
+    //     timestamp: true,
+    //     message: true,
+    //     sender:{
+    //       select:{
+    //         username: true
+    //       }
+    //     },
+    //     receiver: {
+    //       select:{
+    //         username: true
+    //       }
+    //     }
+    //   } 
+    // });
+    
+
+
+    // return c.json(recentTransactions);
   } catch (error) {
     console.error('Error fetching recent transactions:', error);
     return c.json({ error: 'Internal Server Error' });

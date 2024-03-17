@@ -37,7 +37,7 @@ interface Transaction {
         })
         setRecentTransaction(resposne.data)
 
-        console.log(resposne.data)
+        
 
 
       } catch (error) {
@@ -62,7 +62,9 @@ interface Transaction {
       <React.Fragment key={transaction.id}>
         <div className="flex items-center gap-4 justify-between">
           <div>
-            <div className="font-semibold">{`Sent to ${transaction.receiver.username}`}</div>
+            {/* <div className="font-semibold">{`Sent to ${transaction.receiver.name}`}</div>
+            <div className="font-semibold">{`Sent to ${transaction.sender.name}`}</div> */}
+            <div className="font-semibold">{`${transaction.sender.name ? `Sent to ${transaction.receiver.name}` :`Received from ${transaction.sender.name}`}`}</div>
             <div className="text-sm text-gray-500 dark:text-gray-400">
               {new Date(transaction.timestamp).toLocaleString('en-US', {
                 month: 'long',
