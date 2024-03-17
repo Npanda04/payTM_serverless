@@ -14,8 +14,8 @@ export const SideBanner = () =>{
           <li>several things has been taken into consideration like </li>
           <li>you can not transfer money to yourself</li>
           <li>you can not transfer money over your existing balance </li>
+          <li>Last 3 recent transactions</li>
           <li>things to be implemented are:-</li>
-          <li>recent transactions</li>
           <li>friend lists</li>
           <li>send to random user's just like sending to phone numbers</li>
           <li>some UX/UI improvements</li>
